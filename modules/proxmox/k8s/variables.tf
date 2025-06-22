@@ -72,19 +72,3 @@ variable "hostname_prefix" {
   type        = string
   description = "Prefix used to name VMs"
 }
-
-variable "proxmox_api_url" {
-  type        = string
-  description = "Proxmox API URL, e.g. https://<proxmox-host>:8006/api2/json"
-}
-variable "proxmox_api_token_id" {
-  type        = string
-  sensitive   = true
-  description = "Proxmox API token ID"
-}
-variable "proxmox_api_token_secret" {
-  type        = string
-  sensitive   = true
-  description = "Proxmox API token secret"
-}
-

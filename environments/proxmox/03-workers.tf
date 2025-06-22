@@ -1,4 +1,4 @@
-module "proxmox_workers_nodes" {
+module "k8s_workers" {
   source           = "../../modules/proxmox/k8s"
   vms_id_start     = var.workers_vms_id_start
   vm_count         = var.workers_vm_count
@@ -15,9 +15,5 @@ module "proxmox_workers_nodes" {
   gateway          = var.gateway
   hostname_prefix  = var.worker_hostname_prefix
   disk_size        = var.workers_disk_size
-  # Proxmox API credentials
-  proxmox_api_url          = var.proxmox_api_url
-  proxmox_api_token_id     = var.proxmox_api_token_id
-  proxmox_api_token_secret = var.proxmox_api_token_secret
-  depends_on = [module.proxmox_controller_nodes]
+  depends_on       = [module.k8s_controllers]
 }

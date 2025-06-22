@@ -8,17 +8,19 @@ terraform {
 }
 
 resource "proxmox_vm_qemu" "vm" {
-  vmid             = var.vms_id_start + count.index + 1
-  count            = var.vm_count
-  name             = "${var.hostname_prefix}-${count.index + 1}"
-  agent            = 1
-  target_node      = var.target_node
-  clone            = var.template
-  full_clone       = true
-  scsihw           = "virtio-scsi-single"
-  vm_state         = "running"
-  automatic_reboot = true
-  onboot           = true
+  vmid                   = var.vms_id_start + count.index + 1
+  count                  = var.vm_count
+  name                   = "${var.hostname_prefix}-${count.index + 1}"
+  agent                  = 1
+  define_connection_info = true
+  agent_timeout          = 120
+  target_node            = var.target_node
+  clone                  = var.template
+  full_clone             = true
+  scsihw                 = "virtio-scsi-single"
+  vm_state               = "running"
+  automatic_reboot       = true
+  onboot                 = true
 
   os_type = "cloud-init"
   memory  = var.memory
@@ -59,13 +61,11 @@ resource "proxmox_vm_qemu" "vm" {
     }
   }
 
-
   network {
     id     = 0
     bridge = var.network_bridge
     model  = "virtio"
   }
-
 
   # Cloud-Init configuration
   cicustom = "vendor=local:snippets/qemu-guest-agent.yml" # /var/lib/vz/snippets/qemu-guest-agent.yml
@@ -75,6 +75,18 @@ resource "proxmox_vm_qemu" "vm" {
   skip_ipv6  = true
   ciuser     = "cloud"
   sshkeys    = file(var.public_key_path)
+
+  provisioner "remote-exec" {
+    inline = [
+      "echo VM is up and accessible!"
+    ]
+    connection {
+      type        = "ssh"
+      user        = var.ssh_user
+      private_key = file(var.private_key_path)
+      host        = self.default_ipv4_address
+    }
+  }
 
   timeouts {
     create = "10m"
