@@ -1,3 +1,8 @@
+variable "vm_user" {
+  type        = string
+  description = "User for SSH and cloud-init"
+}
+
 variable "vms_id_start" {
   type        = number
   description = "Starting ID for VMs"
@@ -36,11 +41,6 @@ variable "network_bridge" {
 variable "disk_size" {
   type        = string
   description = "Disk size for VMs, e.g. '50G'"
-}
-
-variable "ssh_user" {
-  type        = string
-  description = "User for SSH and cloud-init"
 }
 
 variable "private_key_path" {

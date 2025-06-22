@@ -9,6 +9,7 @@ This project automates the provisioning of virtual machines for a [Kubernetes](h
 - A prepared VM template for cloning
 - [Terraform](https://www.terraform.io/) (version 1.0 or higher recommended)
 - Proxmox API token with sufficient permissions
+- A [cloud-init](https://cloud-init.io/) snippet placed in `/var/lib/vz/snippets/` on your Proxmox node for VM
 
 ## Usage
 1. **Clone the repository**
