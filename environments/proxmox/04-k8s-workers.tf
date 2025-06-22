@@ -1,5 +1,5 @@
 module "k8s_workers" {
-  source           = "../../modules/proxmox/k8s"
+  source           = "../../modules/proxmox"
   vms_id_start     = var.workers_vms_id_start
   vm_count         = var.workers_vm_count
   template         = var.template
