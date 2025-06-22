@@ -1,0 +1,28 @@
+all:
+  children:
+    servers:
+      hosts:
+        proxmox:
+          ansible_host: 192.168.0.2
+          ansible_user: user
+          ansible_ssh_private_key_file: private-key-path
+          ansible_python_interpreter: ../../.venv/bin/python
+        dns:
+          ansible_host: 192.168.0.10
+          ansible_user: user
+          ansible_ssh_private_key_file: private-key-path
+          ansible_python_interpreter: ../../.venv/bin/python
+    k8s-controllers:
+      hosts:
+        controller1:
+          ansible_host: 192.168.0.20
+          ansible_user: user
+          ansible_ssh_private_key_file: private-key-path
+          ansible_python_interpreter: ../../.venv/bin/python
+    k8s-workers:
+      hosts:
+        worker1:
+          ansible_host: 192.168.0.30
+          ansible_user: user
+          ansible_ssh_private_key_file: private-key-path
+          ansible_python_interpreter: ../../.venv/bin/python
