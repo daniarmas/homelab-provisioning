@@ -2,7 +2,7 @@
 Infrastructure-as-Code to provision and configure VMs for my homelab using Terraform, Ansible and Proxmox.
 
 ## Overview
-This project automates the provisioning of virtual machines for a [Kubernetes](https://kubernetes.io/) cluster on Proxmox using [Terraform](https://www.terraform.io/) and the [Telmate Proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest) Proxmox provider. The codebase follows a modular structure, separating environment-specific configuration from reusable VM provisioning logic for better maintainability and scalability.
+This project automates the provisioning and deployment of a [Kubernetes](https://kubernetes.io/) cluster on Proxmox using [Terraform](https://www.terraform.io/) with the [Telmate Proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest) and [Ansible](https://docs.ansible.com/). 
 
 ## Requirements
 - Proxmox VE cluster with API access
