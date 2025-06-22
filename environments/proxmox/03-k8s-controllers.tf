@@ -1,5 +1,5 @@
 module "k8s_controllers" {
-  source           = "../../modules/proxmox/k8s"
+  source           = "../../modules/proxmox"
   vms_id_start     = var.controllers_vms_id_start + 1
   vm_count         = var.controllers_vm_count
   template         = var.template
