@@ -25,24 +25,28 @@ This project automates the provisioning and deployment of a [Kubernetes](https:/
    ```sh
    source .venv/bin/activate
    ```
-4. **Install the python requirements**
+4. **Install the python requirements for ansible**
    ```sh
    pip install -r requirements.txt
    ```
-5. **Copy and edit variables**
+5. **Copy and edit the inventory**
+   ```sh
+   cp inventory/example-inventory.yaml inventory/inventory.yaml
+   ```
+6. **Copy and edit variables**
    Copy `tfvars-example` to `terraform.tfvars` and fill in your environment-specific values (API credentials, VM specs, etc).
    ```sh
    cp tfvars-example terraform.tfvars
    ```
-6. **Initialize Terraform**
+7. **Initialize Terraform**
    ```sh
    terraform init
    ```
-7. **Review the plan**
+8. **Review the plan**
    ```sh
    terraform plan
    ```
-8. **Apply the configuration**
+9.  **Apply the configuration**
    ```sh
    terraform apply
    ```
