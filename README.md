@@ -15,22 +15,34 @@ This project automates the provisioning and deployment of a [Kubernetes](https:/
 1. **Clone the repository**
    ```sh
    git clone https://github.com/daniarmas/homelab-provisioning
-   cd homelab-provisioning/terraform/environments/proxmox
+   cd homelab-provisioning/ansible
    ```
-2. **Copy and edit variables**
+2. **Creates a virtual environment for Ansible**
+   ```sh
+   python3 -m venv .venv
+   ```
+3. **Activate the virtual environment**
+   ```sh
+   source .venv/bin/activate
+   ```
+4. **Install the python requirements**
+   ```sh
+   pip install -r requirements.txt
+   ```
+5. **Copy and edit variables**
    Copy `tfvars-example` to `terraform.tfvars` and fill in your environment-specific values (API credentials, VM specs, etc).
    ```sh
    cp tfvars-example terraform.tfvars
    ```
-3. **Initialize Terraform**
+6. **Initialize Terraform**
    ```sh
    terraform init
    ```
-4. **Review the plan**
+7. **Review the plan**
    ```sh
    terraform plan
    ```
-5. **Apply the configuration**
+8. **Apply the configuration**
    ```sh
    terraform apply
    ```
