@@ -75,11 +75,6 @@ variable "network_bridge" {
   description = "Proxmox bridge to attach VM NIC"
 }
 
-variable "ssh_user" {
-  type        = string
-  description = "User for SSH and cloud-init"
-}
-
 variable "private_key_path" {
   type        = string
   description = "Path to private SSH key"

@@ -7,7 +7,6 @@ module "k8s_workers" {
   cores            = var.workers_cores
   memory           = var.workers_memory
   network_bridge   = var.network_bridge
-  ssh_user         = var.ssh_user
   vm_user          = var.vm_user
   private_key_path = var.private_key_path
   public_key_path  = var.public_key_path
