@@ -73,7 +73,7 @@ resource "proxmox_vm_qemu" "vm" {
   nameserver = var.vm_nameservers
   ipconfig0  = "ip=${var.vm_ips[count.index]}/24,gw=${var.gateway}"
   skip_ipv6  = true
-  ciuser     = "cloud"
+  ciuser     = var.vm_user
   sshkeys    = file(var.public_key_path)
 
   provisioner "remote-exec" {
@@ -82,7 +82,7 @@ resource "proxmox_vm_qemu" "vm" {
     ]
     connection {
       type        = "ssh"
-      user        = var.ssh_user
+      user        = var.vm_user
       private_key = file(var.private_key_path)
       host        = self.default_ipv4_address
     }
