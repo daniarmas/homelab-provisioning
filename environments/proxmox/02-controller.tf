@@ -1,6 +1,6 @@
-module "proxmox_controller_nodes" {
+module "k8s_controllers" {
   source           = "../../modules/proxmox/k8s"
-  vms_id_start     = var.controllers_vms_id_start
+  vms_id_start     = var.controllers_vms_id_start + 1
   vm_count         = var.controllers_vm_count
   template         = var.template
   target_node      = var.target_node
@@ -15,8 +15,4 @@ module "proxmox_controller_nodes" {
   gateway          = var.gateway
   hostname_prefix  = var.controller_hostname_prefix
   disk_size        = var.controllers_disk_size
-  # Proxmox API credentials
-  proxmox_api_url          = var.proxmox_api_url
-  proxmox_api_token_id     = var.proxmox_api_token_id
-  proxmox_api_token_secret = var.proxmox_api_token_secret
 }

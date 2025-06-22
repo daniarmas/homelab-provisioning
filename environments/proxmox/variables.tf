@@ -87,7 +87,7 @@ variable "public_key_path" {
 
 variable "controller_vm_ips" {
   type        = list(string)
-  description = "List of static IPs to assign to each VM"
+  description = "List of static IPs to assign to each controller VM"
 }
 
 variable "worker_vm_ips" {
@@ -109,19 +109,3 @@ variable "worker_hostname_prefix" {
   type        = string
   description = "Prefix used to name worker VMs"
 }
-
-variable "proxmox_api_url" {
-  type        = string
-  description = "Proxmox API URL, e.g. https://<proxmox-host>:8006/api2/json"
-}
-variable "proxmox_api_token_id" {
-  type        = string
-  sensitive   = true
-  description = "Proxmox API token ID"
-}
-variable "proxmox_api_token_secret" {
-  type        = string
-  sensitive   = true
-  description = "Proxmox API token secret"
-}
-
