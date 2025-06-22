@@ -33,20 +33,24 @@ This project automates the provisioning and deployment of a [Kubernetes](https:/
    ```sh
    cp inventory/example-inventory.yaml inventory/inventory.yaml
    ```
-6. **Copy and edit variables**
+6. **Run the vm-template ansible playbook to create the VM template**
+   ```sh
+   ansible % ansible-playbook -i inventory/inventory.yaml playbooks/01-vm-template.yaml
+   ```
+7. **Copy and edit variables**
    Copy `tfvars-example` to `terraform.tfvars` and fill in your environment-specific values (API credentials, VM specs, etc).
    ```sh
    cp tfvars-example terraform.tfvars
    ```
-7. **Initialize Terraform**
+8. **Initialize Terraform**
    ```sh
    terraform init
    ```
-8. **Review the plan**
+9.  **Review the plan**
    ```sh
    terraform plan
    ```
-9.  **Apply the configuration**
+10. **Apply the configuration**
    ```sh
    terraform apply
    ```
