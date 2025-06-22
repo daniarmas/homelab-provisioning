@@ -19,4 +19,5 @@ module "proxmox_workers_nodes" {
   proxmox_api_url          = var.proxmox_api_url
   proxmox_api_token_id     = var.proxmox_api_token_id
   proxmox_api_token_secret = var.proxmox_api_token_secret
+  depends_on = [module.proxmox_controller_nodes]
 }
