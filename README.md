@@ -15,7 +15,7 @@ This project automates the provisioning of virtual machines for a [Kubernetes](h
 1. **Clone the repository**
    ```sh
    git clone https://github.com/daniarmas/homelab-provisioning
-   cd homelab-provisioning/environments/proxmox
+   cd homelab-provisioning/terraform/environments/proxmox
    ```
 2. **Copy and edit variables**
    Copy `tfvars-example` to `terraform.tfvars` and fill in your environment-specific values (API credentials, VM specs, etc).
@@ -41,7 +41,7 @@ This project automates the provisioning of virtual machines for a [Kubernetes](h
 
 ## Customization
 - Edit the variables in `terraform.tfvars` to match your network, VM specs, and Proxmox environment.
-- The [modules/proxmox/main.tf](modules/proxmox/main.tf) file defines the VM provisioning logic and can be extended as needed.
+- The [terraform/modules/proxmox/main.tf](terraform/modules/proxmox/main.tf) file defines the VM provisioning logic and can be extended as needed.
 
 ## License
 MIT License. See [LICENSE](LICENSE) for details.
