@@ -23,3 +23,6 @@ ssh_user         = "user"                     #changme
 public_key_path  = "your-public-key-path.pub" #changme
 private_key_path = "your-private-key-path"    #changme
 gateway          = "192.168.0.1"              #changme
+vm_nameservers   = "192.168.0.10 192.168.0.20" #changme
+controllers_vms_id_start = 200
+workers_vms_id_start = 300

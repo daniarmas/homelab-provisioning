@@ -1,5 +1,6 @@
 module "proxmox_workers_nodes" {
-  source           = "../../modules/proxmox"
+  source           = "../../modules/proxmox/k8s"
+  vms_id_start     = var.workers_vms_id_start
   vm_count         = var.workers_vm_count
   template         = var.template
   target_node      = var.target_node
@@ -10,6 +11,7 @@ module "proxmox_workers_nodes" {
   private_key_path = var.private_key_path
   public_key_path  = var.public_key_path
   vm_ips           = var.worker_vm_ips
+  vm_nameservers   = var.vm_nameservers
   gateway          = var.gateway
   hostname_prefix  = var.worker_hostname_prefix
   disk_size        = var.workers_disk_size

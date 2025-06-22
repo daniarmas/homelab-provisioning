@@ -1,3 +1,13 @@
+variable "workers_vms_id_start" {
+  type        = number
+  description = "Starting ID for VMs"
+}
+
+variable "controllers_vms_id_start" {
+  type        = number
+  description = "Starting ID for controller VMs"
+}
+
 variable "controllers_vm_count" {
   type        = number
   description = "Number of VMs to create"
@@ -11,6 +21,12 @@ variable "workers_vm_count" {
 variable "controllers_disk_size" {
   type        = string
   description = "Disk size for controller VMs, e.g. '50G'"
+
+}
+
+variable "vm_nameservers" {
+  type        = string
+  description = "Space-separated list of DNS servers to configure in cloud-init"
 
 }
 
