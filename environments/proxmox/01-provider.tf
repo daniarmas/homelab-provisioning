@@ -7,6 +7,22 @@ terraform {
   }
 }
 
+# Provider variables for Proxmox API connection
+variable "proxmox_api_url" {
+  type        = string
+  description = "Proxmox API URL, e.g. https://<proxmox-host>:8006/api2/json"
+}
+variable "proxmox_api_token_id" {
+  type        = string
+  sensitive   = true
+  description = "Proxmox API token ID"
+}
+variable "proxmox_api_token_secret" {
+  type        = string
+  sensitive   = true
+  description = "Proxmox API token secret"
+}
+
 provider "proxmox" {
   pm_api_url          = var.proxmox_api_url
   pm_api_token_id     = var.proxmox_api_token_id

@@ -1,25 +1,39 @@
-proxmox_api_url          = "https://192.168.0.2:8006/api2/json" #changme
-proxmox_api_token_id     = "your-token-id"                      #changme
-proxmox_api_token_secret = "your-secret-token"                  #changme
+proxmox_api_url          = "https://192.168.0.2:8006/api2/json" #changeme
+proxmox_api_token_id     = "your-token-id" #changeme
+proxmox_api_token_secret = "your-secret-token" #changeme
 
 
-# controllers
+# k8s controllers
 controller_hostname_prefix = "k8s-controller"
 controllers_vm_count       = 3
-controller_cores           = 2
-controller_memory          = 4096
-controller_vm_ips          = ["192.168.0.10", "192.168.0.11", "192.168.0.12"] #changme
-# workers
+controllers_cores          = 2
+controllers_memory         = 4096
+controllers_disk_size      = "50G"
+controllers_vms_id_start   = 200
+controller_vm_ips          = ["192.168.0.10", "192.168.0.11", "192.168.0.12"] #changeme
+# k8s workers
 worker_hostname_prefix = "k8s-worker"
-workers_vm_count       = 3
-worker_cores           = 4
-worker_memory          = 8192
-worker_vm_ips          = ["192.168.0.20", "192.168.0.21", "192.168.0.22"] #changme
+workers_vm_count       = 4
+workers_cores          = 4
+workers_memory         = 8192
+workers_disk_size      = "175G"
+workers_vms_id_start   = 300
+worker_vm_ips          = ["192.168.0.60", "192.168.0.61", "192.168.0.62", "192.168.0.63"] #changeme
+# dns
+dns_hostname_prefix = "dns"
+dns_vm_count        = 1
+dns_cores           = 2
+dns_memory          = 2048
+dns_disk_size       = "20G"
+dns_vms_id          = 400
+dns_vm_ips          = ["192.168.0.70"] #changeme
 # common
-template         = "template-name"            #changme
-target_node      = "your-proxmox-node"        #changme
-network_bridge   = "your-bridge-name"         #changme
-ssh_user         = "user"                     #changme
-public_key_path  = "your-public-key-path.pub" #changme
-private_key_path = "your-private-key-path"    #changme
-gateway          = "192.168.0.1"              #changme
+vm_user          = "user" #changeme
+template         = "ubuntu-cloud"
+target_node      = "proxmox"
+network_bridge   = "vmbr0"
+public_key_path  = "your-public-key.pub" #changeme
+private_key_path = "your-private-key"     #changeme
+gateway          = "192.168.0.1" #changeme
+vm_nameservers   = "192.168.0.30 192.168.0.1" #changeme
+
