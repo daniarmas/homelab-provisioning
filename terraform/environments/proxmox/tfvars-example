@@ -36,4 +36,6 @@ public_key_path  = "your-public-key.pub" #changeme
 private_key_path = "your-private-key"     #changeme
 gateway          = "192.168.0.1" #changeme
 vm_nameservers   = "192.168.0.30 192.168.0.1" #changeme
+dns_ci_custom    = "vendor=local:snippets/dns-ci.yml"
+k8s_ci_custom    = "vendor=local:snippets/k8s-ci.yml"
 

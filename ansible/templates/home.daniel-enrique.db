@@ -1,0 +1,23 @@
+$ORIGIN home.daniel-enrique.com.
+$TTL 3600
+
+@   IN  SOA dns.home.daniel-enrique.com. daniel.armas9706.gmail.com. (
+        2025060101 ; serial
+        7200       ; refresh
+        3600       ; retry
+        1209600    ; expire
+        3600 )     ; minimum
+
+    IN  NS  dns.home.daniel-enrique.com.
+
+@                   IN A 172.30.0.30
+dns                 IN A 172.30.0.30
+gateway             IN A 172.30.0.1
+proxmox             IN A 172.30.0.20
+k8s-controller-1    IN A 172.30.0.50
+k8s-controller-2    IN A 172.30.0.51
+k8s-controller-3    IN A 172.30.0.52
+k8s-worker-1        IN A 172.30.0.60
+k8s-worker-2        IN A 172.30.0.61
+k8s-worker-3        IN A 172.30.0.62
+k8s-worker-4        IN A 172.30.0.63

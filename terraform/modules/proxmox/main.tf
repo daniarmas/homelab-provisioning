@@ -68,7 +68,7 @@ resource "proxmox_vm_qemu" "vm" {
   }
 
   # Cloud-Init configuration
-  cicustom = "vendor=local:snippets/qemu-guest-agent.yml" # /var/lib/vz/snippets/qemu-guest-agent.yml
+  cicustom = var.ci_custom # /var/lib/vz/snippets/
   # ciupgrade  = true
   nameserver = var.vm_nameservers
   ipconfig0  = "ip=${var.vm_ips[count.index]}/24,gw=${var.gateway}"
