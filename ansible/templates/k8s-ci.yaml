@@ -1,0 +1,14 @@
+#cloud-config
+packages:
+  - qemu-guest-agent
+package_update: true
+package_upgrade: true
+
+users:
+  - name: cloud
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    lock_passwd: true
+
+runcmd:
+  - [ systemctl, enable, --now, qemu-guest-agent.service ]
