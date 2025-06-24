@@ -13,6 +13,11 @@ variable "vm_count" {
   description = "Number of VMs to create"
 }
 
+variable "ci_custom" {
+  type        = string
+  description = "Custom cloud-init configuration"
+}
+
 variable "template" {
   type        = string
   description = "VM template to clone"

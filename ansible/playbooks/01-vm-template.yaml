@@ -1,0 +1,65 @@
+- name: Create Ubuntu Cloud-Init Template in Proxmox
+  hosts: proxmox
+  become: true
+  vars:
+    vm_id: 9000
+    img_url: https://cloud-images.ubuntu.com/releases/noble/release/ubuntu-24.04-server-cloudimg-amd64.img
+    img_name: ubuntu-24.04-server-cloudimg-amd64.img
+    img_path: /var/lib/vz/template/iso/{{ img_name }}
+    storage: local-lvm
+    bridge: vmbr0
+    template_name: ubuntu-24-04-cloud-template
+
+  tasks:
+    - name: Ensure image directory exists
+      file:
+        path: "/var/lib/vz/template/iso"
+        state: directory
+        mode: '0755'
+
+    - name: Download Ubuntu Cloud Image
+      get_url:
+        url: "{{ img_url }}"
+        dest: "{{ img_path }}"
+        mode: '0644'
+        force: no
+
+    - name: Create a new VM
+      command: >
+        qm create {{ vm_id }}
+        --memory 2048
+        --cores 2
+        --name {{ template_name }}
+        --net0 virtio,bridge={{ bridge }}
+      args:
+        creates: "/etc/pve/qemu-server/{{ vm_id }}.conf"
+
+    - name: Import the downloaded disk to Proxmox storage
+      command: >
+        qm disk import {{ vm_id }} {{ img_path }} {{ storage }}
+
+    - name: Attach the disk as SCSI
+      command: >
+        qm set {{ vm_id }}
+        --scsihw virtio-scsi-pci
+        --scsi0 {{ storage }}:vm-{{ vm_id }}-disk-0
+
+    - name: Add cloud-init drive
+      command: >
+        qm set {{ vm_id }}
+        --ide2 {{ storage }}:cloudinit
+
+    - name: Make the cloud-init drive bootable
+      command: >
+        qm set {{ vm_id }}
+        --boot c
+        --bootdisk scsi0
+
+    - name: Add serial console
+      command: >
+        qm set {{ vm_id }}
+        --serial0 socket
+        --vga serial0
+
+    - name: Convert VM to template
+      command: qm template {{ vm_id }}
