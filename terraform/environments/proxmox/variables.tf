@@ -75,6 +75,16 @@ variable "network_bridge" {
   description = "Proxmox bridge to attach VM NIC"
 }
 
+variable "dns_ci_custom" {
+  type        = string
+  description = "Custom cloud-init configuration for DNS VMs"
+}
+
+variable "k8s_ci_custom" {
+  type        = string
+  description = "Custom cloud-init configuration for Kubernetes VMs"
+}
+
 variable "private_key_path" {
   type        = string
   description = "Path to private SSH key"

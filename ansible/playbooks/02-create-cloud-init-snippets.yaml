@@ -1,0 +1,10 @@
+- name: Create snippets for cloud-init
+  hosts: proxmox
+  become: true
+  vars:
+    snippet_path: /var/lib/vz/snippets
+  tasks:
+  - name: Copy dns cloud-init snippet
+    template: src=../templates/dns-ci.yaml dest="{{ snippet_path }}/dns-ci.yaml" mode='0644'
+  - name: Copy k8s cloud-init snippet
+    template: src=../templates/k8s-ci.yaml dest="{{ snippet_path }}/k8s-ci.yaml" mode='0644'

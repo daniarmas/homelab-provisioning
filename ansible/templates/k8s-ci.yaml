@@ -1,0 +1,25 @@
+#cloud-config
+packages:
+  - qemu-guest-agent
+package_update: true
+package_upgrade: true
+
+timezone: America/New_York
+
+write_files:
+  - path: /etc/systemd/timesyncd.conf
+    content: |
+      # Your timesyncd.conf template content here
+      [Time]
+      NTP=time.google.com time1.google.com time2.google.com time3.google.com
+      FallbackNTP=ntp.ubuntu.com
+
+users:
+  - name: cloud
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    shell: /bin/bash
+    lock_passwd: true
+
+runcmd:
+  - [ systemctl, enable, --now, qemu-guest-agent.service ]
+  - [ systemctl, restart, systemd-timesyncd.service ]

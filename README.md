@@ -1,8 +1,8 @@
 # homelab-provisioning
-Infrastructure-as-Code to provision VMs for my homelab using Terraform and Proxmox.
+Infrastructure-as-Code to provision and configure VMs for my homelab using Terraform, Ansible and Proxmox.
 
 ## Overview
-This project automates the provisioning of virtual machines for a [Kubernetes](https://kubernetes.io/) cluster on Proxmox using [Terraform](https://www.terraform.io/) and the [Telmate Proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest) Proxmox provider. The codebase follows a modular structure, separating environment-specific configuration from reusable VM provisioning logic for better maintainability and scalability.
+This project automates the provisioning and deployment of a [Kubernetes](https://kubernetes.io/) cluster on Proxmox using [Terraform](https://www.terraform.io/) with the [Telmate Proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest) and [Ansible](https://docs.ansible.com/). 
 
 ## Requirements
 - Proxmox VE cluster with API access
@@ -15,22 +15,42 @@ This project automates the provisioning of virtual machines for a [Kubernetes](h
 1. **Clone the repository**
    ```sh
    git clone https://github.com/daniarmas/homelab-provisioning
-   cd homelab-provisioning/environments/proxmox
+   cd homelab-provisioning/ansible
    ```
-2. **Copy and edit variables**
+2. **Creates a virtual environment for Ansible**
+   ```sh
+   python3 -m venv .venv
+   ```
+3. **Activate the virtual environment**
+   ```sh
+   source .venv/bin/activate
+   ```
+4. **Install the python requirements for ansible**
+   ```sh
+   pip install -r requirements.txt
+   ```
+5. **Copy and edit the inventory**
+   ```sh
+   cp inventory/example-inventory.yaml inventory/inventory.yaml
+   ```
+6. **Run the vm-template ansible playbook to create the VM template**
+   ```sh
+   ansible % ansible-playbook -i inventory/inventory.yaml playbooks/01-vm-template.yaml
+   ```
+7. **Copy and edit variables**
    Copy `tfvars-example` to `terraform.tfvars` and fill in your environment-specific values (API credentials, VM specs, etc).
    ```sh
    cp tfvars-example terraform.tfvars
    ```
-3. **Initialize Terraform**
+8. **Initialize Terraform**
    ```sh
    terraform init
    ```
-4. **Review the plan**
+9.  **Review the plan**
    ```sh
    terraform plan
    ```
-5. **Apply the configuration**
+10. **Apply the configuration**
    ```sh
    terraform apply
    ```
@@ -41,7 +61,7 @@ This project automates the provisioning of virtual machines for a [Kubernetes](h
 
 ## Customization
 - Edit the variables in `terraform.tfvars` to match your network, VM specs, and Proxmox environment.
-- The [modules/proxmox/main.tf](modules/proxmox/main.tf) file defines the VM provisioning logic and can be extended as needed.
+- The [terraform/modules/proxmox/main.tf](terraform/modules/proxmox/main.tf) file defines the VM provisioning logic and can be extended as needed.
 
 ## License
 MIT License. See [LICENSE](LICENSE) for details.

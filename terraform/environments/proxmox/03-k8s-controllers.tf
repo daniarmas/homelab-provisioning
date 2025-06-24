@@ -15,5 +15,6 @@ module "k8s_controllers" {
   gateway          = var.gateway
   hostname_prefix  = var.controller_hostname_prefix
   disk_size        = var.controllers_disk_size
+  ci_custom        = var.k8s_ci_custom
   depends_on       = [module.dns]
 }

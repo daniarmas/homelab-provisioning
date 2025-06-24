@@ -15,4 +15,5 @@ module "dns" {
   gateway          = var.gateway
   hostname_prefix  = var.dns_hostname_prefix
   disk_size        = var.dns_disk_size
+  ci_custom        = var.dns_ci_custom
 }

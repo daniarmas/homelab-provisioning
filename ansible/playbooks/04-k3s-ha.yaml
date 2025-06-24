@@ -1,0 +1,65 @@
+- name: Install K3s on the first server (initial etcd member)
+  hosts: controller1
+  become: true
+  tasks:
+  - name: Install K3s server with embedded etcd
+    shell: |
+      curl -sfL https://get.k3s.io | INSTALL_K3S_EXEC="--cluster-init --write-kubeconfig-mode 644 --node-taint CriticalAddonsOnly=true:NoExecute" sh -
+    args:
+      creates: /usr/local/bin/k3s
+
+  - name: Get K3s node token
+    slurp:
+      src: /var/lib/rancher/k3s/server/node-token
+    register: token
+
+  - name: Set fact for K3s token
+    set_fact:
+      k3s_token: "{{ (token['content'] | b64decode).strip() }}"
+
+  - name: Set fact for server IP
+    set_fact:
+      k3s_server_ip: "{{ ansible_host }}"
+
+- name: Install K3s on additional servers
+  hosts: [controller2, controller3]
+  become: true
+  vars:
+    k3s_token: "{{ hostvars['controller1']['k3s_token'] }}"
+    k3s_server_ip: "{{ hostvars['controller1']['ansible_host'] }}"
+  tasks:
+  - name: Wait for K3s API server to be ready
+    wait_for:
+      host: "{{ k3s_server_ip }}"
+      port: 6443
+      delay: 5
+      timeout: 120
+  - name: Install K3s server to join HA cluster
+    shell: |
+      curl -sfL https://get.k3s.io | \
+      INSTALL_K3S_EXEC="--server https://{{ k3s_server_ip }}:6443 --token {{ k3s_token }} --write-kubeconfig-mode 644 --node-taint CriticalAddonsOnly=true:NoExecute" \
+      sh -
+    args:
+      creates: /usr/local/bin/k3s
+
+- name: Install K3s agents
+  hosts: k8s-workers
+  become: true
+  vars:
+    k3s_token: "{{ hostvars['controller1']['k3s_token'] }}"
+    k3s_server_ip: "{{ hostvars['controller1']['ansible_host'] }}"
+  tasks:
+  - name: Wait for K3s API server to be ready
+    wait_for:
+      host: "{{ k3s_server_ip }}"
+      port: 6443
+      delay: 5
+      timeout: 120
+  - name: Install K3s agent
+    shell: |
+      curl -sfL https://get.k3s.io | \
+      K3S_URL="https://{{ k3s_server_ip }}:6443" \
+      K3S_TOKEN="{{ k3s_token }}" \
+      sh -
+    args:
+      creates: /usr/local/bin/k3s-agent

@@ -15,5 +15,6 @@ module "k8s_workers" {
   gateway          = var.gateway
   hostname_prefix  = var.worker_hostname_prefix
   disk_size        = var.workers_disk_size
+  ci_custom        = var.k8s_ci_custom
   depends_on       = [module.k8s_controllers]
 }
