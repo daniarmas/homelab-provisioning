@@ -1,5 +1,5 @@
 module "dns" {
-  source           = "../../modules/proxmox"
+  source           = "../modules/vm"
   vms_id_start     = var.dns_vms_id
   vm_count         = var.dns_vm_count
   template         = var.template
