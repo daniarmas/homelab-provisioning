@@ -7,6 +7,8 @@ This project automates the provisioning and deployment of a [Kubernetes](https:/
 - Proxmox API token with sufficient permissions
 
 ## Usage
+First you need to setup proxmox
+
 1. **Clone the repository**
    ```sh
    git clone https://github.com/daniarmas/homelab-provisioning

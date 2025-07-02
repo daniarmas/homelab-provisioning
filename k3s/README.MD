@@ -1,15 +1,14 @@
 # K3s Provisioning
 
-This folder contains the Terraform and Ansible configurations for provisioning a [K3s](https://k3s.io/) Kubernetes cluster on Proxmox.
+This folder contains the Terraform and Ansible configurations for provisioning a [K3s](https://k3s.io/) Kubernetes cluster on Proxmox and a DNS server.
 
 ## Overview
 
-- Provisions controller and worker VMs for K3s using reusable modules from the project’s `modules/` directory.
+- Provisions controlplanes and workers VMs for K3s using reusable modules from the project’s `modules/` directory.
 - Designed to be used after the DNS infrastructure is provisioned.
 
 ## Requirements
-
-- Proxmox VE cluster
+- Proxmox VE cluster with API access
 - [Terraform](https://www.terraform.io/) (version 1.0 or higher recommended)
 - Proxmox API token with sufficient permissions
 
@@ -31,55 +30,23 @@ This folder contains the Terraform and Ansible configurations for provisioning a
    ```sh
    terraform apply
    ```
-5. **Go the Ansible folder. When DNS Vm is Running**
+5. **Go the Ansible folder**
    ```sh
    cd ../../ansible 
    ```
-6. **Creates a virtual environment for Ansible**
-   ```sh
-   python3 -m venv .venv
-   ```
-7. **Activate the virtual environment**
+6. **Activate the virtual environment**
    ```sh
    source .venv/bin/activate
    ```
-8. **Install the python requirements for ansible**
+7.  **Run the ansible playbook to setup the DNS**
    ```sh
-   pip install -r requirements.txt
+   ansible-playbook -i inventory/inventory.yaml playbooks/03-install-dns.yaml
    ```
-9. **Copy and edit the inventory to match your environment values**
-   ```sh
-   cp inventory/example-inventory.yaml inventory/inventory.yaml
-   ```
-10. **Run the vm-template ansible playbook to create the VM template**
-   ```sh
-   ansible-playbook -i inventory/inventory.yaml playbooks/01-vm-template.yaml
-   ```
-11. **Copy and edit variables**
-   Copy `tfvars-example` to `terraform.tfvars` and fill in your environment-specific values (API credentials, VM specs, etc).
-   ```sh
-   cp tfvars-example terraform.tfvars
-   ```
-12. **Initialize Terraform**
-   ```sh
-   terraform init
-   ```
-13. **Review the plan**
-   ```sh
-   terraform plan
-   ```
-14. **Apply the configuration**
-   ```sh
-   terraform apply
-   ```
-
-
-
 
 ## Customization
 
-- Edit variables in `terraform.tfvars` to set the number of controllers, workers, VM specs, and network settings.
-- The VM provisioning logic is defined in the shared module at `../modules/vm/`.
+- Edit variables in `terraform.tfvars` to set the dns vm specs.
+- The VM provisioning logic is defined in the shared module.
 
 ## License
 
