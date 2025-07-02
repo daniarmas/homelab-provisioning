@@ -53,7 +53,6 @@ First you need to setup proxmox
 
 ## Customization
 - Edit the variables in `terraform.tfvars` to match your network, VM specs, and Proxmox environment.
-- The [terraform/modules/proxmox/main.tf](terraform/modules/proxmox/main.tf) file defines the VM provisioning logic and can be extended as needed.
 
 ## License
 MIT License. See [LICENSE](LICENSE) for details.
