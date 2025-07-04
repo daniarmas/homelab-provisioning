@@ -7,7 +7,7 @@ Infrastructure-as-Code to provision and configure k8s for my homelab using Terra
 This project automates the provisioning and deployment of a [Kubernetes](https://kubernetes.io/) cluster on Proxmox using [Terraform](https://www.terraform.io/) with the [Telmate Proxmox provider](https://registry.terraform.io/providers/Telmate/proxmox/latest) and [Ansible](https://docs.ansible.com/).
 
 The repository is organized in a modular way:
-- Each environment or stack (e.g., `dns/`, `k3s/`, `talos/`) is defined in its own folder with separate Terraform configuration and state. This allows you to provision infrastructure components independently and in the required order (for example, DNS before K3s).
+- Each environment or stack (e.g., `dns/`, `k3s/`) is defined in its own folder with separate Terraform configuration and state. This allows you to provision infrastructure components independently and in the required order (for example, DNS before K3s).
 
 ## Requirements
 - Proxmox VE cluster with API access
@@ -23,7 +23,6 @@ The repository is organized in a modular way:
 
 2. **Follow the documentation for each stack:**
    - To provision Kubernetes using K3s, see the [K3s documentation](./k3s/README.md).
-   - To provision Kubernetes using Talos Linux, see the [Talos documentation](./talos/README.md).
 
 ## Security
 
