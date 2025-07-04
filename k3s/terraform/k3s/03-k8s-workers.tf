@@ -1,5 +1,5 @@
 module "k8s_workers" {
-  source           = "../../modules/proxmox"
+  source           = "../modules/vm"
   vms_id_start     = var.workers_vms_id_start
   vm_count         = var.workers_vm_count
   template         = var.template
@@ -16,5 +16,5 @@ module "k8s_workers" {
   hostname_prefix  = var.worker_hostname_prefix
   disk_size        = var.workers_disk_size
   ci_custom        = var.k8s_ci_custom
-  depends_on       = [module.k8s_controllers]
+  depends_on       = [module.k8s_controlplanes]
 }

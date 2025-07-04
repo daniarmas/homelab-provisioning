@@ -1,0 +1,41 @@
+proxmox_api_url          = "https://192.168.0.2:8006/api2/json" #changeme
+proxmox_api_token_id     = "your-token-id" #changeme
+proxmox_api_token_secret = "your-secret-token" #changeme
+
+
+# k8s controllers
+controller_hostname_prefix = "k8s-controller"
+controllers_vm_count       = 3
+controllers_cores          = 2
+controllers_memory         = 4096
+controllers_disk_size      = "50G"
+controllers_vms_id_start   = 200
+controller_vm_ips          = ["192.168.0.20"] #changeme
+# k8s workers
+worker_hostname_prefix = "k8s-worker"
+workers_vm_count       = 4
+workers_cores          = 4
+workers_memory         = 8192
+workers_disk_size      = "175G"
+workers_vms_id_start   = 300
+worker_vm_ips          = ["192.168.0.30"] #changeme
+# dns
+dns_hostname_prefix = "dns"
+dns_vm_count        = 1
+dns_cores           = 2
+dns_memory          = 2048
+dns_disk_size       = "20G"
+dns_vms_id          = 400
+dns_vm_ips          = ["192.168.0.10"] #changeme
+# common
+vm_user          = "user" #changeme
+template         = "ubuntu-cloud"
+target_node      = "proxmox"
+network_bridge   = "vmbr0"
+public_key_path  = "your-public-key.pub" #changeme
+private_key_path = "your-private-key"     #changeme
+gateway          = "192.168.0.1" #changeme
+vm_nameservers   = "192.168.0.30 192.168.0.1" #changeme
+dns_ci_custom    = "vendor=local:snippets/dns-ci.yml"
+k8s_ci_custom    = "vendor=local:snippets/k8s-ci.yml"
+
